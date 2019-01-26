@@ -1,0 +1,13 @@
+version: '3'
+services:
+        app1:
+                image: uelfar/app1:1
+        app2:
+                build: ./App2
+        revproxy:
+                image: uelfar/revproxy:1
+                depends_on:
+                        - app1
+                        - app2
+                ports:
+                        - "9090:80"
