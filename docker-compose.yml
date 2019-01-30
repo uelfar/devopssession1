@@ -2,12 +2,18 @@ version: '3'
 services:
         app1:
                 image: uelfar/app1:1
+                ports:
+                        - "9090:8080"
         app2:
                 build: ./App2
+                ports:
+                        - "9091:8080"
         revproxy:
                 image: uelfar/revproxy:1
                 depends_on:
                         - app1
                         - app2
                 ports:
-                        - "9090:80"
+                        - "9095:80"
+                volumes:
+                        - ./files/default.conf:/etc/nginx/conf.d/default.conf
